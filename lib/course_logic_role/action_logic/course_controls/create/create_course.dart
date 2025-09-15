@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
@@ -707,7 +708,10 @@ class MakeCourseStructure extends StatefulWidget {
 }
 
 class _MakeCourseStructureState extends State<MakeCourseStructure> {
-  final String apiKey = 'AIzaSyCSOVyko1jhvg_TcCEvU7wy-3AzgHjQZMY'; // Replace with your YouTube API key
+  // The API Key for the corresponding YouTube Data API service.
+  // Retrieved by dot env package of flutter:
+  final String apiKey = dotenv.env['API_KEY'].toString();
+
   String? _extractVideoId(String url) {
     RegExp regExp = RegExp(r'^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*');
     final match = regExp.firstMatch(url);

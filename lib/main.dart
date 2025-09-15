@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -59,6 +60,13 @@ Future<void> main() async {
   debugPrint(UserData.googleUserUID);
   debugPrint(UserData.googleUserPhotoURL);
   debugPrint(UserData.googleUserIsVerified.toString());
+
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    throw Exception('Error loading .env file: $e');
+  }
+
   runApp(
     MaterialApp(
       title: AppTheme.appName,
